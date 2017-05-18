@@ -8,7 +8,7 @@ let win
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({width: 800, height: 400})
+  win = new BrowserWindow({width: 800, height: 600})
   win.setResizable(false);
   // and load the index.html of the app.
   win.loadURL(url.format({
@@ -19,7 +19,7 @@ function createWindow () {
 
   // Open the DevTools.
   //win.webContents.openDevTools()
-
+  
   // Emitted when the window is closed.
   win.on('closed', () => {
     // Dereference the window object, usually you would store windows
@@ -43,6 +43,9 @@ app.on('window-all-closed', () => {
   }
 })
 
+app.on('browser-window-created',function(e,window) {
+    window.setMenu(null);
+});
 app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.

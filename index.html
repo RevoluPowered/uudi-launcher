@@ -1,14 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <title>UUDI Launcher</title>
-    <link rel="stylesheet" type="text/css" href="media/main.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>UUDI launcher</title>
+    <link href="media/css/bootstrap.min.css" rel="stylesheet">
+    <link href="media/main.css" rel="stylesheet">
   </head>
   <body>
-    <!---<p>uudi launcher client - running in <script>document.write(process.versions.chrome)</script></p>-->
-    <div class="footer">
-      <button class="button">Launch!</button>
+    <nav class="navbar navbar-inverse navbar-fixed-bottom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">UUDI</a>
     </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Changelog</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <button class="btn btn-danger navbar-btn">Launch</button>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span>Corp Squad Games Ltd &copy;</a></li>
+    </ul>
+  </div>
+</nav>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="media/js/jquery-3.2.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="media/js/bootstrap.min.js"></script>
   </body>
 </html>
