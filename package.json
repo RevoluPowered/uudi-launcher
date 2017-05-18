@@ -1,0 +1,26 @@
+{
+  "name": "uudi-launcher",
+  "version": "1.0.0",
+  "description": "a launcher client for the game uudi",
+  "main": "main.js",
+  "dependencies": {
+    "electron": "^1.6.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RevoluPowered/uudi-launcher.git"
+  },
+  "keywords": [
+    "uudi"
+  ],
+  "author": "Gordon Alexander MacPherson (Corp Squad Games)",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/RevoluPowered/uudi-launcher/issues"
+  },
+  "homepage": "https://github.com/RevoluPowered/uudi-launcher#readme"
+}
