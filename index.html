@@ -7,6 +7,8 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>UUDI launcher</title>
     <link href="media/css/bootstrap.min.css" rel="stylesheet">
+    <link href="media/css/font-awesome.min.css" rel="stylesheet">
+    <link href="media/css/bootstrap-social.css" rel="stylesheet">
     <link href="media/main.css" rel="stylesheet">
   </head>
   <body>
@@ -18,11 +20,19 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
       <li><a href="#">Changelog</a></li>
-      <li><a href="#">Contact</a></li>
     </ul>
     <button class="btn btn-danger navbar-btn">Launch</button>
-
+    <a class="btn btn-social-icon btn-twitter navbar-btn" onclick="openTwitter()">
+      <span class="fa fa-twitter"></span>
+    </a>
+    <a class="btn btn-social-icon btn-twitch navbar-btn" onclick="openTwitch()">
+      <span class="fa fa-twitch"></span>
+    </a>
+    <a class="btn btn-social-icon btn-facebook navbar-btn" onclick="openFacebook()">
+      <span class="fa fa-facebook"></span>
+    </a>
     <ul class="nav navbar-nav navbar-right">
+      
       <li><a href="#"><span class="glyphicon glyphicon-user"></span>Corp Squad Games Ltd &copy;</a></li>
     </ul>
   </div>
@@ -31,5 +41,6 @@
     <script src="media/js/jquery-3.2.1.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="media/js/bootstrap.min.js"></script>
+    <script src="media/js/socialmedia.js"></script>
   </body>
 </html>

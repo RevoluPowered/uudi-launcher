@@ -6,7 +6,9 @@
   "dependencies": {
     "electron": "^1.6.8"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "electron-builder": "^17.8.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
