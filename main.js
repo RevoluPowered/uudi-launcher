@@ -3,6 +3,7 @@ const path = require('path')
 const url = require('url')
 const {download} = require('electron-dl')
 const extract = require('extract-zip')
+const fs = require('file-system')
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
@@ -66,16 +67,37 @@ function downloadFile( url )
 
 function validateFile(download)
 {
-  var localAppPath = app.getAppPath()
-  console.log(download)
-  extract(download.getSavePath(), {dir: localAppPath}, function(error) {
-    if(!error)
+  var localAppPath = app.getPath("userData")
+  var downloadSavePath = download.getSavePath()
+  var expectedPath = localAppPath + "\\UUDI.zip"
+
+  console.log(localAppPath)
+  console.log(expectedPath)
+
+  fs.copyFile(downloadSavePath, expectedPath,
+  {
+    done: function(error)
     {
-      console.log("Extracted file to: " + localAppPath)
-    }
-    else
-    {
-      console.log("Failed to extract to: " + localAppPath)
+      if(!error)
+      {
+        fs.mkdirSync(localAppPath + "\UUDI");
+        extract(expectedPath, localAppPath + "\UUDI", function(err)
+        {
+          if(!err)
+          {
+            console.log("Extracted UUDI client")
+          }
+          else
+          {
+            console.log("Failed to extract file!")
+            console.error(err)
+          }
+        })
+      }
+      else
+      {
+        console.log(error)
+      }
     }
   })
 }
