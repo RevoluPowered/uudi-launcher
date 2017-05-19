@@ -1,7 +1,6 @@
-const {app, BrowserWindow, shell} = require('electron')
+const {app, BrowserWindow, shell, ipcMain} = require('electron')
 const path = require('path')
 const url = require('url')
-
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
@@ -18,7 +17,7 @@ function createWindow () {
   }))
 
   // Open the DevTools.
-  //win.webContents.openDevTools()
+  win.webContents.openDevTools()
   
   // Emitted when the window is closed.
   win.on('closed', () => {
@@ -52,6 +51,20 @@ app.on('activate', () => {
   if (win === null) {
     createWindow()
   }
+})
+
+
+function downloadFile( url )
+{
+  console.log("starting download... : "  + url)
+  
+}
+
+
+ipcMain.on('LaunchButton', (event, arg) => {
+  console.log("recieved!");
+
+  downloadFile(arg.tarball_url)
 })
 
 // In this file you can include the rest of your app's specific main process

@@ -3,6 +3,7 @@
  * Copyright 2011-2016 Twitter, Inc.
  * Licensed under the MIT license
  */
+window.$ = window.jQuery = require('./media/js/jquery.js');
 
 if (typeof jQuery === 'undefined') {
   throw new Error('Bootstrap\'s JavaScript requires jQuery')

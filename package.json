@@ -4,8 +4,7 @@
   "description": "a launcher client for the game uudi",
   "main": "main.js",
   "devDependencies": {
-    "electron": "^1.6.8",
-    "github": "^9.2.0"
+    "electron": "^1.6.8"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -27,5 +26,9 @@
   "bugs": {
     "url": "https://github.com/RevoluPowered/uudi-launcher/issues"
   },
-  "homepage": "https://github.com/RevoluPowered/uudi-launcher#readme"
+  "homepage": "https://github.com/RevoluPowered/uudi-launcher#readme",
+  "dependencies": {
+    "electron-dl": "^1.9.0",
+    "github": "^9.2.0"
+  }
 }
