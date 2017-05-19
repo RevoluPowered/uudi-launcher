@@ -1,6 +1,8 @@
 const {app, BrowserWindow, shell, ipcMain} = require('electron')
 const path = require('path')
 const url = require('url')
+const {download} = require('electron-dl')
+const extract = require('extract-zip')
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
@@ -43,7 +45,7 @@ app.on('window-all-closed', () => {
 })
 
 app.on('browser-window-created',function(e,window) {
-    window.setMenu(null);
+    window.setMenu(null)
 });
 app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
@@ -53,18 +55,35 @@ app.on('activate', () => {
   }
 })
 
-
+// Starts a download
 function downloadFile( url )
 {
   console.log("starting download... : "  + url)
-  
+  download(BrowserWindow.getFocusedWindow(), url)
+    .then(dl => validateFile(dl))
+    .catch(console.error);
 }
 
+function validateFile(download)
+{
+  var localAppPath = app.getAppPath()
+  console.log(download)
+  extract(download.getSavePath(), {dir: localAppPath}, function(error) {
+    if(!error)
+    {
+      console.log("Extracted file to: " + localAppPath)
+    }
+    else
+    {
+      console.log("Failed to extract to: " + localAppPath)
+    }
+  })
+}
 
 ipcMain.on('LaunchButton', (event, arg) => {
   console.log("recieved!");
 
-  downloadFile(arg.tarball_url)
+  downloadFile(arg.zipball_url)
 })
 
 // In this file you can include the rest of your app's specific main process
