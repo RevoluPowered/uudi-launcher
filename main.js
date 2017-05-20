@@ -3,7 +3,9 @@ const path = require('path')
 const url = require('url')
 const {download} = require('electron-dl')
 const extract = require('extract-zip')
-const fs = require('file-system')
+const fs = require('fs')
+const filesystem = require('file-system')
+const execApplication = require('child_process').execFile;
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
@@ -20,7 +22,7 @@ function createWindow () {
   }))
 
   // Open the DevTools.
-  win.webContents.openDevTools()
+ // win.webContents.openDevTools()
   
   // Emitted when the window is closed.
   win.on('closed', () => {
@@ -74,13 +76,13 @@ function validateFile(download)
   console.log(localAppPath)
   console.log(expectedPath)
 
-  fs.copyFile(downloadSavePath, expectedPath,
+  filesystem.copyFile(downloadSavePath, expectedPath,
   {
     done: function(error)
     {
       if(!error)
       {
-        fs.mkdirSync(localAppPath + "\UUDI");
+        fs.mkdirSync(localAppPath + "\\UUDI");
         extract(expectedPath, { dir: localAppPath + "\\UUDI" }, function(err)
         {
           if(!err)
@@ -104,8 +106,22 @@ function validateFile(download)
 
 ipcMain.on('LaunchButton', (event, arg) => {
   console.log("recieved!");
-
-  downloadFile(arg.zipball_url)
+ 
+  // check we've not already downloaded this release
+  if(!fs.existsSync( app.getPath("userData") + "\\UUDI\\windows"))
+  {
+    downloadFile("http://192.168.1.48/builds/windows.zip")
+  }
+  else
+  {
+    var executablePath = app.getPath("userData") + "\\UUDI\\windows\\uudi.exe";
+    execApplication(executablePath, function(err, data) {
+      if(err)
+      {
+        console.error(err)
+      }
+    })
+  }
 })
 
 // In this file you can include the rest of your app's specific main process
