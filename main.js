@@ -81,7 +81,7 @@ function validateFile(download)
       if(!error)
       {
         fs.mkdirSync(localAppPath + "\UUDI");
-        extract(expectedPath, localAppPath + "\UUDI", function(err)
+        extract(expectedPath, { dir: localAppPath + "\\UUDI" }, function(err)
         {
           if(!err)
           {
