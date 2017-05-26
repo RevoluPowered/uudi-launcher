@@ -35,8 +35,9 @@ function OnLaunch()
 // _value - the text / value of the controls
 function SetLaunchContol( _state, _value )
 {
-    var launchControl = document.getElementById("launchbutton")
-    launchControl.innerHTML = _value
-    $('#launchbutton').prop('disabled', !_state)
+    var launchControl = $('#launchbutton')
+    //launchControl.innerHTML = _value
+    launchControl.text(_value)
+    launchControl.prop('disabled', !_state)
 }
 
