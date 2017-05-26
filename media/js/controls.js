@@ -30,13 +30,25 @@ function OnLaunch()
 
 }
 
+
+$(document).ready(() => {
+    // Request the client is launched
+    ipcRenderer.send('Client.HasUpdate')
+    console.log("Checking for updates")
+})
+
+ipcRenderer.on("Client.UpdateAvailable", (err) =>
+{
+    console.log("Recieved notification of update from main thread")
+    SetLaunchContol(true, "Install/Download...")
+})
+
 // Set the launch control status
 // _state - the control state
 // _value - the text / value of the controls
 function SetLaunchContol( _state, _value )
 {
     var launchControl = $('#launchbutton')
-    //launchControl.innerHTML = _value
     launchControl.text(_value)
     launchControl.prop('disabled', !_state)
 }

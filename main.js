@@ -115,6 +115,13 @@ function validateFile(download)
   })
 }
 
+ipcMain.on("Client.HasUpdate", (event, arg) => {
+  if(!fs.existsSync( app.getPath("userData") + "\\UUDI\\windows\\uudi.exe"))
+  {
+    win.webContents.send("Client.UpdateAvailable")
+  }
+})
+
 
 ipcMain.on('Client.RequestLaunch', (event, arg) => {
 
