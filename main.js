@@ -13,7 +13,7 @@ let win
 function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({width: 800, height: 600})
-  win.setResizable(false);
+  //win.setResizable(false);
   // and load the index.html of the app.
   win.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
@@ -22,7 +22,7 @@ function createWindow () {
   }))
 
   // Open the DevTools.
- // win.webContents.openDevTools()
+  win.webContents.openDevTools()
   
   // Emitted when the window is closed.
   win.on('closed', () => {
@@ -62,9 +62,14 @@ app.on('activate', () => {
 function downloadFile( url )
 {
   console.log("starting download... : "  + url)
+  win.webContents.send("Client.Download.Begin")
   download(BrowserWindow.getFocusedWindow(), url)
     .then(dl => validateFile(dl))
-    .catch(console.error);
+    .catch( err => {
+      win.webContents.send("Client.Download.Error", err)
+      console.error(err)
+    });
+  
 }
 
 function validateFile(download)
@@ -82,12 +87,18 @@ function validateFile(download)
     {
       if(!error)
       {
-        fs.mkdirSync(localAppPath + "\\UUDI");
+        // Attempt to create directory
+        try
+        { fs.mkdirSync(localAppPath + "\\UUDI");
+        } catch (e){}
+
+        // extract the zip file
         extract(expectedPath, { dir: localAppPath + "\\UUDI" }, function(err)
         {
           if(!err)
           {
             console.log("Extracted UUDI client")
+            win.webContents.send("Client.Ready")
           }
           else
           {
@@ -104,17 +115,21 @@ function validateFile(download)
   })
 }
 
-ipcMain.on('LaunchButton', (event, arg) => {
-  console.log("recieved!");
- 
+
+ipcMain.on('Client.RequestLaunch', (event, arg) => {
+
   // check we've not already downloaded this release
-  if(!fs.existsSync( app.getPath("userData") + "\\UUDI\\windows"))
+  if(!fs.existsSync( app.getPath("userData") + "\\UUDI\\windows\\uudi.exe"))
   {
-    downloadFile("http://192.168.1.48/builds/windows.zip")
+    // Download from the repository
+    downloadFile("http://192.168.1.52/builds/windows.zip")
   }
   else
   {
+    // The executable
     var executablePath = app.getPath("userData") + "\\UUDI\\windows\\uudi.exe";
+    
+    // Run the application
     execApplication(executablePath, function(err, data) {
       if(err)
       {

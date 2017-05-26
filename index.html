@@ -12,6 +12,14 @@
     <link href="media/main.css" rel="stylesheet">
   </head>
   <body>
+    <div class="content">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-4 well">
+          <h3>This is a test</h3>
+          <p>here is some example content, that could potentially be the changelog</p>
+        </div>
+      </div>
+    </div>
     <nav class="navbar navbar-inverse navbar-fixed-bottom">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -21,7 +29,7 @@
       <li class="active"><a href="#">Home</a></li>
       <li><a href="#">Changelog</a></li>
     </ul>
-    <button class="btn btn-danger navbar-btn" onclick="OnLaunch()">Launch</button>
+    <button class="btn btn-danger navbar-btn" id="launchbutton" onclick="OnLaunch()">Launch</button>
     <a class="btn btn-social-icon btn-twitter navbar-btn" onclick="openTwitter()">
       <span class="fa fa-twitter"></span>
     </a>
@@ -31,8 +39,7 @@
     <a class="btn btn-social-icon btn-facebook navbar-btn" onclick="openFacebook()">
       <span class="fa fa-facebook"></span>
     </a>
-    <ul class="nav navbar-nav navbar-right">
-      
+    <ul class="nav navbar-nav navbar-right">      
       <li><a href="#"><span class="glyphicon glyphicon-user"></span> Corp Squad Games Ltd &copy;</a></li>
     </ul>
   </div>
